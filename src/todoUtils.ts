@@ -3,8 +3,52 @@ import type { Todo, Priority } from './types'
 export type TaskFilter = 'all' | 'active' | 'completed'
 export type SortOrder = 'high-to-low' | 'low-to-high'
 
-let todos: Todo[] = []
-let nextId = 1
+const STORAGE_KEY = 'lunaria-todos'
+
+// Load saved tasks
+const loadTodos = (): Todo[] => {
+  try {
+    const storedTodos = localStorage.getItem(STORAGE_KEY)
+
+    if (!storedTodos) return []
+
+    const parsed: unknown = JSON.parse(storedTodos)
+
+    if (!Array.isArray(parsed)) return []
+
+    return parsed.filter((todo): todo is Todo => {
+      if (typeof todo !== 'object' || todo === null) return false
+
+      const task = todo as Record<string, unknown>
+
+      return (
+        typeof task.id === 'number' &&
+        Number.isSafeInteger(task.id) &&
+        task.id > 0 &&
+        typeof task.text === 'string' &&
+        task.text.trim().length > 0 &&
+        typeof task.completed === 'boolean' &&
+        (task.priority === 'high' ||
+          task.priority === 'medium' ||
+          task.priority === 'low')
+      )
+    })
+  } catch {
+    return []
+  }
+}
+
+let todos: Todo[] = loadTodos()
+let nextId = Math.max(0, ...todos.map(todo => todo.id)) + 1
+
+// Save tasks
+const saveTodos = (): void => {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(todos))
+  } catch {
+    // Keep the application usable if storage is unavailable
+  }
+}
 
 export const getTodos = (): Todo[] => {
   return todos.map(todo => ({ ...todo }))
@@ -26,6 +70,7 @@ export const addTodo = (
   }
 
   todos.push(newTodo)
+  saveTodos()
 }
 
 export const editTodo = (id: number, text: string): void => {
@@ -38,10 +83,12 @@ export const editTodo = (id: number, text: string): void => {
   if (!todo) return
 
   todo.text = trimmedText
+  saveTodos()
 }
 
 export const removeTodo = (id: number): void => {
   todos = todos.filter(todo => todo.id !== id)
+  saveTodos()
 }
 
 // Toggle task completion
@@ -51,6 +98,7 @@ export const toggleTodo = (id: number): void => {
   if (!todo) return
 
   todo.completed = !todo.completed
+  saveTodos()
 }
 
 // Update task priority
@@ -60,6 +108,7 @@ export const updateTodoPriority = (id: number, priority: Priority): void => {
   if (!todo) return
 
   todo.priority = priority
+  saveTodos()
 }
 
 // Filter tasks by completion status
