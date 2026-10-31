@@ -1,14 +1,15 @@
 import './style.css'
 import { addTodo } from './todoUtils'
-import { renderTodos, setTaskFilter } from './todoUI'
+import { renderTodos, setTaskFilter, setSortOrder } from './todoUI'
 import type { Priority } from './types'
-import type { TaskFilter } from './todoUtils'
+import type { TaskFilter, SortOrder } from './todoUtils'
 
 // DOM elements
 const todoInput = document.getElementById('todo-input') as HTMLInputElement
 const todoForm = document.querySelector('.todo-form') as HTMLFormElement
 const prioritySelect = document.getElementById('priority-select') as HTMLSelectElement
 const errorMessage = document.getElementById('error-message') as HTMLParagraphElement
+const sortSelect = document.getElementById('sort-select') as HTMLSelectElement
 
 // Add new task
 todoForm.addEventListener('submit', (event: Event) => {
@@ -52,6 +53,12 @@ filterButtons.forEach(button => {
 
     setTaskFilter(filter)
   })
+})
+
+// Task sorting
+sortSelect.addEventListener('change', () => {
+  const order = sortSelect.value as SortOrder
+  setSortOrder(order)
 })
 
 // Initial render
