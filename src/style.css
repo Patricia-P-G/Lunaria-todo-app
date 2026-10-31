@@ -231,3 +231,9 @@ h1 {
 .todo-priority option[value="low"] {
   color: #28a745;
 }
+
+/* Filter Active */
+.filter-button.active {
+  background-color: #7988d2;
+  color: #fff;
+}
