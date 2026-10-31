@@ -237,3 +237,24 @@ h1 {
   background-color: #7988d2;
   color: #fff;
 }
+
+/* Task sorting */
+.todo-sorting {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.todo-sorting label {
+  font-size: 13px;
+}
+
+#sort-select {
+  padding: 8px 12px;
+  border-radius: 6px;
+  background-color: #fff;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
