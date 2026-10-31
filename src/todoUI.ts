@@ -3,7 +3,7 @@ import editHoverIcon from './assets/icons/edit-hover-icon.svg'
 import deleteIcon from './assets/icons/delete-icon.svg'
 import deleteHoverIcon from './assets/icons/delete-hover-icon.svg'
 
-import { editTodo, getTodos, removeTodo } from './todoUtils'
+import { editTodo, getTodos, removeTodo, toggleTodo } from './todoUtils'
 
 // Render tasks
 export const renderTodos = (): void => {
@@ -16,8 +16,24 @@ export const renderTodos = (): void => {
     const li = document.createElement('li')
     li.className = 'todo-item'
 
+    // Task completion checkbox
+    const checkbox = document.createElement('input')
+    checkbox.type = 'checkbox'
+    checkbox.className = 'todo-checkbox'
+    checkbox.checked = todo.completed
+    checkbox.setAttribute('aria-label', `Mark ${todo.text} as ${todo.completed ? 'incomplete' : 'complete'}`)
+
+    checkbox.addEventListener('change', () => {
+      toggleTodo(todo.id)
+      renderTodos()
+    })
+
     const taskText = document.createElement('span')
     taskText.textContent = todo.text
+
+    if (todo.completed) {
+      taskText.classList.add('completed')
+    }
 
     // Edit button
     const editButton = document.createElement('button')
@@ -105,6 +121,7 @@ export const renderTodos = (): void => {
       taskText.replaceWith(editInput)
       editButton.replaceWith(saveButton)
       deleteButton.hidden = true
+      checkbox.disabled = true
       li.appendChild(cancelButton)
 
       editInput.focus()
@@ -117,7 +134,7 @@ export const renderTodos = (): void => {
       renderTodos()
     })
 
-    li.append(taskText, editButton, deleteButton)
+    li.append(checkbox, taskText, editButton, deleteButton)
     todoList.appendChild(li)
   })
 }
