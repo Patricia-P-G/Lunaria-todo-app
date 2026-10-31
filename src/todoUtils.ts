@@ -1,4 +1,3 @@
-
 import type { Todo, Priority } from './types'
 
 export type TaskFilter = 'all' | 'active' | 'completed'
