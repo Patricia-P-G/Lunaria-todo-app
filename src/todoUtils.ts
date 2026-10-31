@@ -36,3 +36,12 @@ export const editTodo = (id: number, text: string): void => {
 export const removeTodo = (id: number): void => {
   todos = todos.filter(todo => todo.id !== id)
 }
+
+// Toggle task completion
+export const toggleTodo = (id: number): void => {
+  const todo = todos.find(todo => todo.id === id)
+
+  if (!todo) return
+
+  todo.completed = !todo.completed
+}
