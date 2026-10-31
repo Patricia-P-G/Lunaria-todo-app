@@ -1,4 +1,4 @@
-import type { Todo } from './types'
+import type { Todo, Priority } from './types'
 
 let todos: Todo[] = []
 let nextId = 1
@@ -7,7 +7,10 @@ export const getTodos = (): Todo[] => {
   return todos.map(todo => ({ ...todo }))
 }
 
-export const addTodo = (text: string): void => {
+export const addTodo = (
+  text: string,
+  priority: Priority = 'medium'
+): void => {
   const trimmedText = text.trim()
 
   if (!trimmedText) return
@@ -15,7 +18,8 @@ export const addTodo = (text: string): void => {
   const newTodo: Todo = {
     id: nextId++,
     text: trimmedText,
-    completed: false
+    completed: false,
+    priority
   }
 
   todos.push(newTodo)
@@ -44,4 +48,13 @@ export const toggleTodo = (id: number): void => {
   if (!todo) return
 
   todo.completed = !todo.completed
+}
+
+// Update task priority
+export const updateTodoPriority = (id: number, priority: Priority): void => {
+  const todo = todos.find(todo => todo.id === id)
+
+  if (!todo) return
+
+  todo.priority = priority
 }
