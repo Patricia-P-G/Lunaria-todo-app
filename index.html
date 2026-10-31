@@ -13,7 +13,14 @@
       <h1>Todo App</h1>
 
       <form class="todo-form">
-        <input type="text" id="todo-input" placeholder="Add a new task" aria-label="New task"/>
+        <input type="text" placeholder="Add a new task" id="todo-input">
+
+        <select id="priority-select" aria-label="Task priority">
+          <option value="high">High</option>
+          <option value="medium" selected>Medium</option>
+          <option value="low">Low</option>
+        </select>
+
         <button type="submit">Add</button>
       </form>
 
