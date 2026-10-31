@@ -11,6 +11,26 @@ const prioritySelect = document.getElementById('priority-select') as HTMLSelectE
 const errorMessage = document.getElementById('error-message') as HTMLParagraphElement
 const sortSelect = document.getElementById('sort-select') as HTMLSelectElement
 
+// Show validation error
+const showValidationError = (): void => {
+  todoInput.classList.add('input-error')
+  errorMessage.textContent = 'Please enter a valid task name'
+  errorMessage.style.display = 'block'
+}
+
+// Clear validation error
+const clearValidationError = (): void => {
+  todoInput.classList.remove('input-error')
+  errorMessage.style.display = 'none'
+}
+
+// Validate task input
+todoInput.addEventListener('input', () => {
+  if (todoInput.value.trim() !== '') {
+    clearValidationError()
+  }
+})
+
 // Add new task
 todoForm.addEventListener('submit', (event: Event) => {
   event.preventDefault()
@@ -18,8 +38,7 @@ todoForm.addEventListener('submit', (event: Event) => {
   const text = todoInput.value.trim()
 
   if (text === '') {
-    todoInput.classList.add('input-error')
-    errorMessage.style.display = 'block'
+    showValidationError()
     return
   }
 
@@ -29,8 +48,7 @@ todoForm.addEventListener('submit', (event: Event) => {
 
   todoInput.value = ''
   prioritySelect.value = 'medium'
-  todoInput.classList.remove('input-error')
-  errorMessage.style.display = 'none'
+  clearValidationError()
 
   renderTodos()
 })
