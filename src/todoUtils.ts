@@ -94,3 +94,25 @@ export const sortTodosByPriority = (
     return order === 'high-to-low' ? -difference : difference
   })
 }
+
+// Calculate task completion progress
+export const getTaskProgress = (): {
+  completed: number
+  total: number
+  percentage: number
+} => {
+  const todos = getTodos()
+
+  const total = todos.length
+  const completed = todos.filter(todo => todo.completed).length
+
+  const percentage = total === 0
+    ? 0
+    : Math.round((completed / total) * 100)
+
+  return {
+    completed,
+    total,
+    percentage
+  }
+}
