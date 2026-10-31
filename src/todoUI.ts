@@ -3,8 +3,18 @@ import editHoverIcon from './assets/icons/edit-hover-icon.svg'
 import deleteIcon from './assets/icons/delete-icon.svg'
 import deleteHoverIcon from './assets/icons/delete-hover-icon.svg'
 
-import { editTodo, getTodos, removeTodo, toggleTodo, updateTodoPriority } from './todoUtils'
+import { editTodo, getFilteredTodos, removeTodo, toggleTodo, updateTodoPriority } from './todoUtils'
+import type { TaskFilter } from './todoUtils'
 import type { Priority } from './types'
+
+// Current task filter
+let currentFilter: TaskFilter = 'all'
+
+// Change task filter
+export const setTaskFilter = (filter: TaskFilter): void => {
+  currentFilter = filter
+  renderTodos()
+}
 
 // Render tasks
 export const renderTodos = (): void => {
@@ -12,7 +22,7 @@ export const renderTodos = (): void => {
 
   todoList.innerHTML = ''
 
-  getTodos().forEach(todo => {
+  getFilteredTodos(currentFilter).forEach(todo => {
     // Task item
     const li = document.createElement('li')
     li.className = 'todo-item'
