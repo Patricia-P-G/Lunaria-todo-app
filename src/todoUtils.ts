@@ -1,5 +1,8 @@
+
 import type { Todo, Priority } from './types'
+
 export type TaskFilter = 'all' | 'active' | 'completed'
+export type SortOrder = 'high-to-low' | 'low-to-high'
 
 let todos: Todo[] = []
 let nextId = 1
@@ -73,4 +76,22 @@ export const getFilteredTodos = (filter: TaskFilter): Todo[] => {
   }
 
   return todos
+}
+
+// Sort tasks by priority
+export const sortTodosByPriority = (
+  todos: Todo[],
+  order: SortOrder = 'high-to-low'
+): Todo[] => {
+  const priorityOrder: Record<Priority, number> = {
+    high: 3,
+    medium: 2,
+    low: 1
+  }
+
+  return [...todos].sort((a, b) => {
+    const difference = priorityOrder[a.priority] - priorityOrder[b.priority]
+
+    return order === 'high-to-low' ? -difference : difference
+  })
 }
