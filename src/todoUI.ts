@@ -10,6 +10,28 @@ import type { Priority } from './types'
 // Current task filter
 let currentFilter: TaskFilter = 'all'
 
+// Update filter counts
+const updateFilterCounts = (): void => {
+  const allCount = getFilteredTodos('all').length
+  const activeCount = getFilteredTodos('active').length
+  const completedCount = getFilteredTodos('completed').length
+
+  const counts = {
+    all: allCount,
+    active: activeCount,
+    completed: completedCount
+  }
+
+  const filterButtons = document.querySelectorAll<HTMLButtonElement>('.filter-button')
+
+  filterButtons.forEach(button => {
+    const filter = button.dataset.filter as TaskFilter
+    const label = filter.charAt(0).toUpperCase() + filter.slice(1)
+
+    button.textContent = `${label} (${counts[filter]})`
+  })
+}
+
 // Change task filter
 export const setTaskFilter = (filter: TaskFilter): void => {
   currentFilter = filter
@@ -19,6 +41,8 @@ export const setTaskFilter = (filter: TaskFilter): void => {
 // Render tasks
 export const renderTodos = (): void => {
   const todoList = document.getElementById('todo-list') as HTMLUListElement
+
+  updateFilterCounts()
 
   todoList.innerHTML = ''
 
