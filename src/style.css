@@ -204,3 +204,30 @@ h1 {
   text-decoration: line-through;
   color: #888;
 }
+
+/* Task priority */
+.todo-priority {
+  padding: 6px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* Priority colors */
+.priority-high,
+.todo-priority option[value="high"] {
+  color: #dc3545;
+}
+
+.priority-medium,
+.todo-priority option[value="medium"] {
+  color: #b7791f;
+}
+
+.priority-low,
+.todo-priority option[value="low"] {
+  color: #28a745;
+}
