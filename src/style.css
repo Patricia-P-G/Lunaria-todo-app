@@ -102,6 +102,19 @@ textarea {
   font-family: var(--font-family);
 }
 
+/* Logo */
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.logo-container img {
+  display: block;
+  width: 180px;
+  height: auto;
+}
+
 /* Heading */
 h1 {
   font-family: var(--font-title);
