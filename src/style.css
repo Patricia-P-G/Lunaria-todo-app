@@ -1,61 +1,65 @@
+/* Font imports */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
 /* Root variables */
 :root {
-  --font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --font-family: 'DM Sans', sans-serif;
+  --font-title: 'Cormorant Garamond', serif;
   --line-height: 1.5;
   --font-weight: 400;
 
   --color-scheme: light;
   --color: #292653;
-  --background-color: #FAF4F3;
+  --background-color: #faf4f3;
 
   --font-synthesis: none;
   --text-rendering: optimizeLegibility;
-  --webkit-font-smoothing: antialiased;
-  --moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
   /* Primary colors */
-  --color-primary: #8E83AD;
-  --color-primary-hover: #786D9E;
-  --color-primary-light: #EAE5F0;
+  --color-primary: #8e83ad;
+  --color-primary-hover: #786d9e;
+  --color-primary-light: #eae5f0;
 
   /* Background colors */
-  --color-background: #FAF4F3;
-  --color-surface: #FCF8F8;
-  --color-surface-hover: #F5EFF5;
+  --color-background: #faf4f3;
+  --color-surface: #fcf8f8;
+  --color-surface-hover: #f5eff5;
 
   /* Text colors */
   --color-text: #292653;
-  --color-text-secondary: #8980B5;
-  --color-text-completed: #9189B2;
-  --color-white: #FFFFFF;
+  --color-text-secondary: #8980b5;
+  --color-text-completed: #9189b2;
+  --color-white: #ffffff;
 
   /* Border colors */
-  --color-border: #EAE3E9;
+  --color-border: #eae3e9;
 
   /* Priority - High */
-  --color-high: #FF4D4F;
-  --color-high-bg: #FAE4E1;
+  --color-high: #ff4d4f;
+  --color-high-bg: #fae4e1;
 
   /* Priority - Medium */
-  --color-medium: #FFA940;
-  --color-medium-bg: #F8E9DC;
-  --color-medium-text: #B7791F;
+  --color-medium: #ffa940;
+  --color-medium-bg: #f8e9dc;
+  --color-medium-text: #b7791f;
 
   /* Priority - Low */
-  --color-low: #299B7F;
-  --color-low-bg: #E7EAE7;
+  --color-low: #299b7f;
+  --color-low-bg: #e7eae7;
 
   /* Action colors */
-  --color-edit: #645D91;
-  --color-edit-hover: #8E83AD;
+  --color-edit: #645d91;
+  --color-edit-hover: #8e83ad;
 
-  --color-delete: #E65B65;
-  --color-delete-hover: #C94450;
-  --color-delete-bg-hover: #FCE8E9;
+  --color-delete: #e65b65;
+  --color-delete-hover: #c94450;
+  --color-delete-bg-hover: #fce8e9;
 
   /* Validation colors */
-  --color-error: #DC2626;
-  --color-error-bg: #FFE6E6;
+  --color-error: #dc2626;
+  --color-error-bg: #ffe6e6;
 
   /* Shadows */
   --shadow-sm: 0 2px 8px rgba(41, 38, 83, 0.04);
@@ -64,8 +68,8 @@
   /* Container */
   --body-background-color: var(--color-background);
   --container-background-color: var(--color-white);
-  --container-padding: 20px;
-  --container-border-radius: 5px;
+  --container-padding: 40px 36px;
+  --container-border-radius: 16px;
   --container-box-shadow: var(--shadow-md);
   --container-width: 300px;
 }
@@ -85,16 +89,35 @@ body {
 
 /* Container */
 .container {
-  background: var(--container-background-color);
   padding: var(--container-padding);
-  border-radius: var(--container-border-radius);
-  box-shadow: var(--container-box-shadow);
-  width: var(--container-width);
+  width: 700px;
+  box-sizing: border-box;
+}
+
+/* Form fonts */
+button,
+input,
+select,
+textarea {
+  font-family: var(--font-family);
 }
 
 /* Heading */
 h1 {
-  text-align: center;
+  font-family: var(--font-title);
+  text-align: left;
+  font-size: 50px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.subtitle {
+  font-family: var(--font-family);
+  margin: 0;
+  padding-bottom: 20px;
+  color: #645d91;
+  font-size: 18px;
+  font-weight: 400;
 }
 
 /* Add task form */
