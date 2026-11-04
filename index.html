@@ -35,21 +35,26 @@
 
       <p id="error-message">Please enter a todo item</p>
 
-      <!-- Task filters -->
-      <div class="todo-filters" role="group" aria-label="Filter tasks">
-        <button type="button" class="filter-button active" data-filter="all">All</button>
-        <button type="button" class="filter-button" data-filter="active">Active</button>
-        <button type="button" class="filter-button" data-filter="completed">Completed</button>
-      </div>
+      <!-- Task filters and sorting -->
+      <div class="task-controls">
 
-      <!-- Task sorting -->
-      <div class="todo-sorting">
-        <label for="sort-select">Sort by:</label>
+        <!-- Task filters -->
+        <div class="todo-filters" role="group" aria-label="Filter tasks">
+          <button type="button" class="filter-button active" data-filter="all">All</button>
+          <button type="button" class="filter-button" data-filter="active">Active</button>
+          <button type="button" class="filter-button" data-filter="completed">Completed</button>
+        </div>
 
-        <select id="sort-select">
-          <option value="high-to-low" selected>Priority (High to Low)</option>
-          <option value="low-to-high">Priority (Low to High)</option>
-        </select>
+        <!-- Task sorting -->
+        <div class="todo-sorting">
+          <label for="sort-select">Sort by:</label>
+
+          <select id="sort-select">
+            <option value="high-to-low" selected>Priority (High to Low)</option>
+            <option value="low-to-high">Priority (Low to High)</option>
+          </select>
+        </div>
+
       </div>
 
       <!-- Task progress -->
