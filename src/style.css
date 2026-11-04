@@ -1,3 +1,4 @@
+
 /* Font imports */
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 
@@ -107,6 +108,7 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  margin-bottom: 12px;
 }
 
 .logo-container img {
@@ -136,24 +138,126 @@ h1 {
 /* Add task form */
 .todo-form {
   display: flex;
-  justify-content: space-between;
+  align-items: stretch;
+  gap: 12px;
+  width: 100%;
 }
 
+/* Task input */
 .todo-form input {
   flex: 1;
   min-width: 0;
-  padding: 10px;
+  padding: 12px 16px;
+  background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: 3px;
+  border-radius: 10px;
+  box-shadow: var(--shadow-sm);
+  color: var(--color-text);
+  font-size: 13px;
 }
 
+.todo-form input::placeholder {
+  color: var(--color-text-secondary);
+  opacity: 1;
+}
+
+.todo-form input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+/* Priority dropdown */
+#priority-select {
+  flex: 0 0 105px;
+  width: 105px;
+  min-width: 0;
+  padding: 12px 10px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  box-shadow: var(--shadow-sm);
+  color: var(--color-text);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Dropdown hover */
+#priority-select:hover {
+  border-color: var(--color-primary);
+  background-color: var(--color-surface-hover);
+}
+
+/* Dropdown focus */
+#priority-select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+/* Dropdown options */
+#priority-select option {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  font-family: var(--font-family);
+  font-size: 13px;
+  padding: 12px;
+}
+
+/* Priority option colors */
+#priority-select option[value="high"] {
+  color: var(--color-high);
+}
+
+#priority-select option[value="medium"] {
+  color: var(--color-medium-text);
+}
+
+#priority-select option[value="low"] {
+  color: var(--color-low);
+}
+
+/* Add task button */
 .todo-form button {
-  padding: 10px;
+  flex: 0 0 155px;
+  min-width: 0;
+  position: relative;
+  padding: 12px 28px;
   border: none;
+  border-radius: 10px;
   background: var(--color-primary);
   color: var(--color-white);
-  border-radius: 3px;
+  font-size: 13px;
+  font-weight: 500;
   cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: background-color 0.2s ease;
+}
+
+.todo-form button:hover {
+  background: var(--color-primary-hover);
+}
+
+/* Button sparkles */
+.todo-form button::before {
+  content: "✦";
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #f4d4c5;
+  font-size: 16px;
+}
+
+.todo-form button::after {
+  content: "✦";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #f4d4c5;
+  font-size: 18px;
 }
 
 /* Task list */
@@ -400,4 +504,45 @@ h1 {
   color: var(--color-text-secondary);
   font-size: 14px;
   list-style: none;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  .container {
+    width: 100%;
+    padding: 24px 16px;
+  }
+
+  .logo-container img {
+    width: 160px;
+  }
+
+  h1 {
+    font-size: 42px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+  }
+
+  .todo-form {
+    flex-wrap: wrap;
+  }
+
+  .todo-form input {
+    flex: 1 0 100%;
+    box-sizing: border-box;
+  }
+
+  #priority-select {
+    flex: 0 0 105px;
+  }
+
+  .todo-form button {
+    flex: 1;
+  }
+
+  .task-progress {
+    padding: 16px;
+  }
 }
