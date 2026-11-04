@@ -116,6 +116,21 @@ textarea {
   height: auto;
 }
 
+/* Task header */
+.task-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 20px;
+}
+
+/* Task heading */
+.task-heading {
+  flex: 1;
+  min-width: 0;
+}
+
 /* Heading */
 h1 {
   font-family: var(--font-title);
@@ -132,6 +147,10 @@ h1 {
   color: #645d91;
   font-size: 18px;
   font-weight: 400;
+}
+
+.task-heading .subtitle {
+  padding-bottom: 0;
 }
 
 /* Add task form */
@@ -517,31 +536,43 @@ h1 {
 
 /* Task progress */
 .task-progress {
-  padding: 16px 30px;
-  margin: 20px 0;
+  flex: 0 0 240px;
+  box-sizing: border-box;
+  padding: 16px 20px;
+  margin: 0;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
 }
 
+/* Task progress header */
 .task-progress-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 12px;
+  gap: 12px;
+  margin-bottom: 10px;
 }
 
+/* Progress text */
 #progress-count,
 #progress-percentage {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
+  color: var(--color-primary);
 }
 
+/* Progress bar */
 .progress-bar {
   width: 100%;
-  height: 12px;
+  height: 9px;
   background-color: var(--color-primary-light);
   border-radius: 999px;
   overflow: hidden;
 }
 
+/* Progress fill */
 .progress-fill {
   width: 0%;
   height: 100%;
@@ -604,12 +635,28 @@ h1 {
     width: 160px;
   }
 
+  .task-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .task-heading {
+    flex: none;
+  }
+
   h1 {
     font-size: 42px;
   }
 
   .subtitle {
     font-size: 16px;
+  }
+
+  .task-progress {
+    flex: none;
+    width: 100%;
+    padding: 16px;
   }
 
   .todo-form {
@@ -627,10 +674,6 @@ h1 {
 
   .todo-form button {
     flex: 1;
-  }
-
-  .task-progress {
-    padding: 16px;
   }
 
   .todo-sorting {
