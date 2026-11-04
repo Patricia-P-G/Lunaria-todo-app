@@ -3,19 +3,12 @@
 
 /* Root variables */
 :root {
-  --font-family: "DM Sans", sans-serif;
-  --font-title: "Cormorant Garamond", serif;
-  --line-height: 1.5;
-  --font-weight: 400;
-
-  --color-scheme: light;
-  --color: #292653;
-  --background-color: #faf4f3;
-
-  --font-synthesis: none;
-  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* Fonts */
+  --font-family: "DM Sans", sans-serif;
+  --font-title: "Cormorant Garamond", serif;
 
   /* Primary colors */
   --color-primary: #8e83ad;
@@ -41,7 +34,6 @@
   --color-high-bg: #fae4e1;
 
   /* Priority - Medium */
-  --color-medium: #ffa940;
   --color-medium-bg: #f8e9dc;
   --color-medium-text: #b7791f;
 
@@ -50,12 +42,10 @@
   --color-low-bg: #e7eae7;
 
   /* Action colors */
-  --color-edit: #645d91;
-  --color-edit-hover: #8e83ad;
-
+  --color-save: #4f9a80;
+  --color-save-hover: #3f8f74;
   --color-delete: #e65b65;
-  --color-delete-hover: #c94450;
-  --color-delete-bg-hover: #fce8e9;
+  --color-delete-hover: #d14a55;
 
   /* Validation colors */
   --color-error: #dc2626;
@@ -67,17 +57,13 @@
 
   /* Container */
   --body-background-color: var(--color-background);
-  --container-background-color: var(--color-white);
   --container-padding: 40px 36px;
-  --container-border-radius: 16px;
-  --container-box-shadow: var(--shadow-md);
-  --container-width: 300px;
+  --container-width: 700px;
 }
 
 /* Body */
 body {
   font-family: var(--font-family);
-  background-color: var(--body-background-color);
   color: var(--color-text);
   margin: 0;
   padding: 0;
@@ -98,7 +84,7 @@ body {
 /* Container */
 .container {
   padding: var(--container-padding);
-  width: 700px;
+  width: min(100%, var(--container-width));
   box-sizing: border-box;
   margin: 20px auto 0;
 }
@@ -106,8 +92,7 @@ body {
 /* Form fonts */
 button,
 input,
-select,
-textarea {
+select {
   font-family: var(--font-family);
 }
 
@@ -143,23 +128,16 @@ textarea {
 /* Heading */
 h1 {
   font-family: var(--font-title);
-  text-align: left;
   font-size: 50px;
   font-weight: 700;
   margin: 0;
 }
 
 .subtitle {
-  font-family: var(--font-family);
   margin: 0;
-  padding-bottom: 20px;
   color: #645d91;
   font-size: 18px;
   font-weight: 400;
-}
-
-.task-heading .subtitle {
-  padding-bottom: 0;
 }
 
 /* Add task form */
@@ -191,6 +169,7 @@ h1 {
 .todo-form input:focus {
   outline: none;
   border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-light);
 }
 
 /* Priority dropdown */
@@ -224,9 +203,6 @@ h1 {
 #priority-select option {
   background-color: var(--color-white);
   color: var(--color-text);
-  font-family: var(--font-family);
-  font-size: 13px;
-  padding: 12px;
 }
 
 #priority-select option[value="high"] {
@@ -329,8 +305,6 @@ h1 {
 
   padding: 12px 16px;
   min-height: 30px;
-
-  background-color: transparent;
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -380,7 +354,6 @@ h1 {
   justify-content: center;
   flex-shrink: 0;
   background: transparent;
-  border: none;
   padding: 6px;
   cursor: pointer;
 }
@@ -430,15 +403,27 @@ h1 {
 
 /* Save and cancel buttons */
 .save-button {
-  background: var(--color-primary);
+  background: var(--color-save);
+  transition: background-color 0.2s ease;
+}
+
+.save-button:hover {
+  background: var(--color-save-hover);
 }
 
 .cancel-button {
   background: var(--color-delete);
+  transition: background-color 0.2s ease;
+}
+
+.cancel-button:hover {
+  background: var(--color-delete-hover);
 }
 
 /* Input validation */
-.input-error {
+.input-error,
+.todo-form input.input-error,
+.todo-form input.input-error:focus {
   border: 2px solid var(--color-error);
   background-color: var(--color-error-bg);
 }
@@ -477,26 +462,23 @@ h1 {
   padding: 7px 8px;
   border: none;
   border-radius: 5px;
-  font-family: var(--font-family);
   font-size: 11px;
   font-weight: 500;
   cursor: pointer;
 }
 
-/* High priority */
-.todo-priority:has(option[value="high"]:checked) {
+/* Priority colours (todoUI.ts adds the priority-* class) */
+.todo-priority.priority-high {
   background-color: var(--color-high-bg);
   color: var(--color-high);
 }
 
-/* Medium priority */
-.todo-priority:has(option[value="medium"]:checked) {
+.todo-priority.priority-medium {
   background-color: var(--color-medium-bg);
   color: var(--color-medium-text);
 }
 
-/* Low priority */
-.todo-priority:has(option[value="low"]:checked) {
+.todo-priority.priority-low {
   background-color: var(--color-low-bg);
   color: var(--color-low);
 }
@@ -535,7 +517,6 @@ h1 {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin: 0;
 }
 
 /* Filter buttons */
@@ -572,7 +553,6 @@ h1 {
   align-items: center;
   justify-content: flex-end;
   gap: 12px;
-  margin: 0;
   flex-shrink: 0;
 }
 
@@ -589,7 +569,6 @@ h1 {
   background-color: var(--color-surface);
   box-shadow: var(--shadow-sm);
   color: var(--color-text);
-  font-family: var(--font-family);
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
@@ -612,7 +591,6 @@ h1 {
   flex: 0 0 240px;
   box-sizing: border-box;
   padding: 16px 20px;
-  margin: 0;
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: 12px;
@@ -658,7 +636,6 @@ h1 {
 .edit-error-message {
   flex-basis: 100%;
   color: var(--color-error);
-  width: 100%;
   margin: 4px 0 0;
   text-align: left;
 }
@@ -673,7 +650,6 @@ h1 {
   text-align: center;
   color: var(--color-text-secondary);
   font-size: 14px;
-  list-style: none;
 }
 
 /* Responsive design */
@@ -700,7 +676,6 @@ h1 {
 
 @media (max-width: 600px) {
   .container {
-    width: 100%;
     padding: 24px 16px;
   }
 
@@ -741,10 +716,6 @@ h1 {
     box-sizing: border-box;
   }
 
-  #priority-select {
-    flex: 0 0 105px;
-  }
-
   .todo-form button {
     flex: 1;
   }
@@ -759,7 +730,7 @@ h1 {
   }
 
   .todo-item span {
-    font-size: 11px;
+    font-size: 14px;
   }
 
   .todo-priority {
