@@ -1,10 +1,10 @@
 /* Font imports */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
 
 /* Root variables */
 :root {
-  --font-family: 'DM Sans', sans-serif;
-  --font-title: 'Cormorant Garamond', serif;
+  --font-family: "DM Sans", sans-serif;
+  --font-title: "Cormorant Garamond", serif;
   --line-height: 1.5;
   --font-weight: 400;
 
@@ -85,6 +85,14 @@ body {
   justify-content: center;
   align-items: flex-start;
   min-height: 100vh;
+
+  /* Lunaria gradient background */
+  background-color: var(--body-background-color);
+  background-image:
+    radial-gradient(circle at 0% 100%, #d9cdea 0, transparent 30%),
+    radial-gradient(circle at 100% 0%, #ddd2ec 0, transparent 28%),
+    radial-gradient(circle at 100% 100%, #e4daf0 0, transparent 25%);
+  background-attachment: fixed;
 }
 
 /* Container */
