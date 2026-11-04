@@ -13,7 +13,7 @@
   --background-color: #faf4f3;
 
   --font-synthesis: none;
-  --text-rendering: optimizeLegibility;
+  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
@@ -282,8 +282,36 @@ h1 {
 .todo-list {
   list-style: none;
   padding: 0;
+  margin: 16px 0 0;
+
+  max-height: 350px;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary) var(--color-primary-light);
 }
 
+/* Task list scrollbar */
+.todo-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.todo-list::-webkit-scrollbar-track {
+  background: var(--color-primary-light);
+  border-radius: 10px;
+}
+
+.todo-list::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 10px;
+}
+
+.todo-list::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-hover);
+}
+
+/* Task items */
 .todo-item {
   background: var(--color-surface);
   padding: 10px;
