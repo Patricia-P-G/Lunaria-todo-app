@@ -2,22 +2,79 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lunaria | My Tasks</title>
-  </head>
 
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    
+  </head>
 
   <body>
     <div class="container">
-      <h1>Todo App</h1>
+      <div class="logo-container">
+        <img src="/lunaria-logo.svg" alt="Lunaria Logo">
+      </div>
+
+      <!-- Header and task progress -->
+      <div class="task-header">
+        <div class="task-heading">
+          <h1>My Tasks</h1>
+          <p class="subtitle">Stay organised and get things done.</p>
+        </div>
+
+        <!-- Task progress -->
+        <div class="task-progress">
+          <div class="task-progress-header">
+            <span id="progress-count">0 of 0 completed</span>
+            <span id="progress-percentage">0%</span>
+          </div>
+
+          <div id="progress-bar" class="progress-bar">
+            <div id="progress-fill" class="progress-fill"></div>
+          </div>
+        </div>
+      </div>
 
       <form class="todo-form">
-        <input type="text" id="todo-input" placeholder="Add a new task" aria-label="New task"/>
-        <button type="submit">Add</button>
+        <input type="text" placeholder="What do you want to do?" id="todo-input">
+
+        <select id="priority-select" aria-label="Task priority">
+          <option value="high">High</option>
+          <option value="medium" selected>Medium</option>
+          <option value="low">Low</option>
+        </select>
+
+        <button type="submit">Add Task</button>
       </form>
 
       <p id="error-message">Please enter a todo item</p>
+
+      <!-- Task filters and sorting -->
+      <div class="task-controls">
+
+        <!-- Task filters -->
+        <div class="todo-filters" role="group" aria-label="Filter tasks">
+          <button type="button" class="filter-button active" data-filter="all">All</button>
+          <button type="button" class="filter-button" data-filter="active">Active</button>
+          <button type="button" class="filter-button" data-filter="completed">Completed</button>
+        </div>
+
+        <!-- Task sorting -->
+        <div class="todo-sorting">
+          <label for="sort-select">Sort by:</label>
+
+          <select id="sort-select">
+            <option value="high-to-low" selected>Priority (High to Low)</option>
+            <option value="low-to-high">Priority (Low to High)</option>
+          </select>
+        </div>
+
+      </div>
 
       <ul class="todo-list" id="todo-list"></ul>
     </div>
