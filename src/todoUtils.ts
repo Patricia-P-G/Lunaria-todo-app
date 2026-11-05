@@ -1,4 +1,5 @@
 import type { Todo, Priority } from './types'
+export type TaskFilter = 'all' | 'active' | 'completed'
 
 let todos: Todo[] = []
 let nextId = 1
@@ -57,4 +58,19 @@ export const updateTodoPriority = (id: number, priority: Priority): void => {
   if (!todo) return
 
   todo.priority = priority
+}
+
+// Filter tasks by completion status
+export const getFilteredTodos = (filter: TaskFilter): Todo[] => {
+  const todos = getTodos()
+
+  if (filter === 'active') {
+    return todos.filter(todo => !todo.completed)
+  }
+
+  if (filter === 'completed') {
+    return todos.filter(todo => todo.completed)
+  }
+
+  return todos
 }

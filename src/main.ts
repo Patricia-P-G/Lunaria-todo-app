@@ -1,7 +1,8 @@
 import './style.css'
 import { addTodo } from './todoUtils'
-import { renderTodos } from './todoUI'
+import { renderTodos, setTaskFilter } from './todoUI'
 import type { Priority } from './types'
+import type { TaskFilter } from './todoUtils'
 
 // DOM elements
 const todoInput = document.getElementById('todo-input') as HTMLInputElement
@@ -31,6 +32,26 @@ todoForm.addEventListener('submit', (event: Event) => {
   errorMessage.style.display = 'none'
 
   renderTodos()
+})
+
+// Task filtering
+const filterButtons = document.querySelectorAll<HTMLButtonElement>('.filter-button')
+
+filterButtons.forEach(button => {
+  button.setAttribute('aria-pressed', String(button.dataset.filter === 'all'))
+
+  button.addEventListener('click', () => {
+    const filter = button.dataset.filter as TaskFilter
+
+    filterButtons.forEach(btn => {
+      const isActive = btn === button
+
+      btn.classList.toggle('active', isActive)
+      btn.setAttribute('aria-pressed', String(isActive))
+    })
+
+    setTaskFilter(filter)
+  })
 })
 
 // Initial render
