@@ -3,7 +3,8 @@ import editHoverIcon from './assets/icons/edit-hover-icon.svg'
 import deleteIcon from './assets/icons/delete-icon.svg'
 import deleteHoverIcon from './assets/icons/delete-hover-icon.svg'
 
-import { editTodo, getTodos, removeTodo, toggleTodo } from './todoUtils'
+import { editTodo, getTodos, removeTodo, toggleTodo, updateTodoPriority } from './todoUtils'
+import type { Priority } from './types'
 
 // Render tasks
 export const renderTodos = (): void => {
@@ -34,6 +35,28 @@ export const renderTodos = (): void => {
     if (todo.completed) {
       taskText.classList.add('completed')
     }
+
+    // Task priority dropdown
+    const prioritySelect = document.createElement('select')
+    prioritySelect.className = 'todo-priority'
+    prioritySelect.setAttribute('aria-label', `Priority for ${todo.text}`)
+
+    const priorities: Priority[] = ['high', 'medium', 'low']
+
+    priorities.forEach(priority => {
+      const option = document.createElement('option')
+      option.value = priority
+      option.textContent = priority.charAt(0).toUpperCase() + priority.slice(1)
+      prioritySelect.appendChild(option)
+    })
+
+    prioritySelect.value = todo.priority
+    prioritySelect.classList.add(`priority-${todo.priority}`)
+
+    prioritySelect.addEventListener('change', () => {
+      updateTodoPriority(todo.id, prioritySelect.value as Priority)
+      renderTodos()
+    })
 
     // Edit button
     const editButton = document.createElement('button')
@@ -122,6 +145,7 @@ export const renderTodos = (): void => {
       editButton.replaceWith(saveButton)
       deleteButton.hidden = true
       checkbox.disabled = true
+      prioritySelect.disabled = true
       li.appendChild(cancelButton)
 
       editInput.focus()
@@ -134,7 +158,7 @@ export const renderTodos = (): void => {
       renderTodos()
     })
 
-    li.append(checkbox, taskText, editButton, deleteButton)
+    li.append(checkbox, taskText, prioritySelect, editButton, deleteButton)
     todoList.appendChild(li)
   })
 }
