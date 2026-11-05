@@ -190,3 +190,17 @@ h1 {
 [hidden] {
   display: none !important;
 }
+
+/* Task completion */
+.todo-checkbox {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #7988d2;
+  flex-shrink: 0;
+}
+
+.todo-item .completed {
+  text-decoration: line-through;
+  color: #888;
+}
