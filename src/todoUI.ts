@@ -3,12 +3,21 @@ import editHoverIcon from './assets/icons/edit-hover-icon.svg'
 import deleteIcon from './assets/icons/delete-icon.svg'
 import deleteHoverIcon from './assets/icons/delete-hover-icon.svg'
 
-import { editTodo, getFilteredTodos, removeTodo, toggleTodo, updateTodoPriority } from './todoUtils'
-import type { TaskFilter } from './todoUtils'
+import { editTodo, getFilteredTodos, removeTodo, toggleTodo, updateTodoPriority, sortTodosByPriority } from './todoUtils'
+import type { TaskFilter, SortOrder } from './todoUtils'
 import type { Priority } from './types'
 
 // Current task filter
 let currentFilter: TaskFilter = 'all'
+
+// Current sorting order
+let currentSortOrder: SortOrder = 'high-to-low'
+
+// Change sorting order
+export const setSortOrder = (order: SortOrder): void => {
+  currentSortOrder = order
+  renderTodos()
+}
 
 // Update filter counts
 const updateFilterCounts = (): void => {
@@ -46,7 +55,11 @@ export const renderTodos = (): void => {
 
   todoList.innerHTML = ''
 
-  getFilteredTodos(currentFilter).forEach(todo => {
+  // Filter and sort tasks
+  const filteredTodos = getFilteredTodos(currentFilter)
+  const sortedTodos = sortTodosByPriority(filteredTodos, currentSortOrder)
+
+  sortedTodos.forEach(todo => {
     // Task item
     const li = document.createElement('li')
     li.className = 'todo-item'
