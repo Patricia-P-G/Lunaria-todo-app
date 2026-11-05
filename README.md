@@ -4,7 +4,8 @@ Lunaria is a celestial-themed todo app built with **TypeScript** and **Vite**. I
 
 **Live app:** https://patricia-p-g.github.io/Lunaria-todo-app/
 
-**GitHub Repository:** https://github.com/Patricia-P-G/Portfolio-Website
+**GitHub Repository:** https://github.com/Patricia-P-G/Lunaria-todo-app/
+
 ## Features
 
 - **Task CRUD**: add, edit (inline with Save and Cancel) and delete tasks
