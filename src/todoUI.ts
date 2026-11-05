@@ -168,12 +168,19 @@ export const renderTodos = (): void => {
       cancelButton.textContent = 'Cancel'
       cancelButton.className = 'cancel-button'
 
+      // Edit validation message
+      const editError = document.createElement('p')
+      editError.className = 'edit-error-message'
+      editError.textContent = 'Please enter a valid task name'
+      editError.style.display = 'none'
+
       // Save edited task
       const saveEdit = (): void => {
         const updatedText = editInput.value.trim()
 
         if (updatedText === '') {
           editInput.classList.add('input-error')
+          editError.style.display = 'block'
           editInput.focus()
           return
         }
@@ -188,8 +195,12 @@ export const renderTodos = (): void => {
         renderTodos()
       })
 
+      // Clear edit validation
       editInput.addEventListener('input', () => {
-        editInput.classList.remove('input-error')
+        if (editInput.value.trim() !== '') {
+          editInput.classList.remove('input-error')
+          editError.style.display = 'none'
+        }
       })
 
       editInput.addEventListener('keydown', (event: KeyboardEvent) => {
@@ -210,6 +221,7 @@ export const renderTodos = (): void => {
       checkbox.disabled = true
       prioritySelect.disabled = true
       li.appendChild(cancelButton)
+      li.appendChild(editError)
 
       editInput.focus()
       editInput.select()

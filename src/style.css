@@ -293,3 +293,16 @@ h1 {
   border-radius: 999px;
   transition: width 0.3s ease;
 }
+
+/* Edit validation message */
+.edit-error-message {
+  flex-basis: 100%;
+  color: #dc2626;
+  width: 100%;
+  margin: 4px 0 0;
+  text-align: left;
+}
+
+.todo-item:has(.edit-error-message) {
+  flex-wrap: wrap;
+}
