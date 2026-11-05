@@ -75,6 +75,23 @@ export const renderTodos = (): void => {
   const filteredTodos = getFilteredTodos(currentFilter)
   const sortedTodos = sortTodosByPriority(filteredTodos, currentSortOrder)
 
+  // Display empty state
+  if (sortedTodos.length === 0) {
+    const emptyState = document.createElement('li')
+    emptyState.className = 'empty-state'
+
+    if (currentFilter === 'active') {
+      emptyState.textContent = 'No active tasks.'
+    } else if (currentFilter === 'completed') {
+      emptyState.textContent = 'No completed tasks yet.'
+    } else {
+      emptyState.textContent = 'No tasks yet. Add your first task!'
+    }
+
+    todoList.appendChild(emptyState)
+    return
+  }
+
   sortedTodos.forEach(todo => {
     // Task item
     const li = document.createElement('li')

@@ -306,3 +306,12 @@ h1 {
 .todo-item:has(.edit-error-message) {
   flex-wrap: wrap;
 }
+
+/* Empty state */
+.empty-state {
+  padding: 32px 16px;
+  text-align: center;
+  color: #6b7280;
+  font-size: 14px;
+  list-style: none;
+}
