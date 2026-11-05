@@ -1,11 +1,12 @@
+/* Root variables */
 :root {
   --font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   --line-height: 1.5;
   --font-weight: 400;
 
-  --color-scheme: light dark;
-  --color: rgba(255, 255, 255, 0.87);
-  --background-color: #242424;
+  --color-scheme: light;
+  --color: #242424;
+  --background-color: #f4f4f4;
 
   --font-synthesis: none;
   --text-rendering: optimizeLegibility;
@@ -20,6 +21,7 @@
   --container-width: 300px;
 }
 
+/* Body */
 body {
   font-family: var(--font-family);
   background-color: var(--body-background-color);
@@ -28,9 +30,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
 }
 
+/* Container */
 .container {
   background: var(--container-background-color);
   padding: var(--container-padding);
@@ -39,10 +42,12 @@ body {
   width: var(--container-width);
 }
 
+/* Heading */
 h1 {
   text-align: center;
 }
 
+/* Add task form */
 .todo-form {
   display: flex;
   justify-content: space-between;
@@ -50,6 +55,7 @@ h1 {
 
 .todo-form input {
   flex: 1;
+  min-width: 0;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 3px;
@@ -64,6 +70,7 @@ h1 {
   cursor: pointer;
 }
 
+/* Task list */
 .todo-list {
   list-style: none;
   padding: 0;
@@ -76,19 +83,100 @@ h1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 8px;
 }
 
+.todo-item span {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* Task buttons */
 .todo-item button {
   border: none;
-  background: #dc3545;
   color: #fff;
   border-radius: 3px;
   cursor: pointer;
+  padding: 6px 8px;
 }
 
+/* Edit task input */
+.todo-edit-input {
+  flex: 1;
+  min-width: 0;
+  padding: 8px;
+  border: 1px solid #7988d2;
+  border-radius: 4px;
+  font: inherit;
+}
+
+.todo-edit-input:focus {
+  outline: 2px solid #7988d2;
+  outline-offset: 2px;
+}
+
+/* Edit and delete buttons */
+.todo-item .edit-button,
+.todo-item .delete-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  padding: 6px;
+}
+
+/* Edit icons */
+.edit-icon,
+.edit-hover-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.edit-hover-icon {
+  display: none;
+}
+
+.edit-button:hover .edit-icon {
+  display: none;
+}
+
+.edit-button:hover .edit-hover-icon {
+  display: block;
+}
+
+/* Delete icons */
+.delete-icon,
+.delete-hover-icon {
+  width: 21px;
+  height: 21px;
+}
+
+.delete-hover-icon {
+  display: none;
+}
+
+.delete-button:hover .delete-icon {
+  display: none;
+}
+
+.delete-button:hover .delete-hover-icon {
+  display: block;
+}
+
+/* Save and cancel buttons */
+.save-button {
+  background: #28a745;
+}
+
+.cancel-button {
+  background: #dc3545;
+}
+
+/* Input validation */
 .input-error {
   border: 2px solid red;
-  background-color: #ffe6e6; /* Optional: Light red background to indicate error */
+  background-color: #ffe6e6;
 }
 
 #error-message {
@@ -96,4 +184,9 @@ h1 {
   font-size: 0.9em;
   margin-top: 5px;
   display: none;
+}
+
+/* Hidden elements */
+[hidden] {
+  display: none !important;
 }
