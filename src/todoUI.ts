@@ -3,7 +3,7 @@ import editHoverIcon from './assets/icons/edit-hover-icon.svg'
 import deleteIcon from './assets/icons/delete-icon.svg'
 import deleteHoverIcon from './assets/icons/delete-hover-icon.svg'
 
-import { editTodo, getFilteredTodos, removeTodo, toggleTodo, updateTodoPriority, sortTodosByPriority } from './todoUtils'
+import { editTodo, getFilteredTodos, getTaskProgress, removeTodo, toggleTodo, updateTodoPriority, sortTodosByPriority } from './todoUtils'
 import type { TaskFilter, SortOrder } from './todoUtils'
 import type { Priority } from './types'
 
@@ -41,6 +41,21 @@ const updateFilterCounts = (): void => {
   })
 }
 
+// Update task completion progress
+const updateTaskProgress = (): void => {
+  const { completed, total, percentage } = getTaskProgress()
+
+  const progressCount = document.getElementById('progress-count') as HTMLSpanElement
+  const progressPercentage = document.getElementById('progress-percentage') as HTMLParagraphElement
+  const progressBar = document.getElementById('progress-bar') as HTMLDivElement
+  const progressFill = document.getElementById('progress-fill') as HTMLDivElement
+
+  progressCount.textContent = `${completed} of ${total} completed`
+  progressPercentage.textContent = `${percentage}%`
+  progressFill.style.width = `${percentage}%`
+  progressBar.setAttribute('aria-valuenow', String(percentage))
+}
+
 // Change task filter
 export const setTaskFilter = (filter: TaskFilter): void => {
   currentFilter = filter
@@ -52,6 +67,7 @@ export const renderTodos = (): void => {
   const todoList = document.getElementById('todo-list') as HTMLUListElement
 
   updateFilterCounts()
+  updateTaskProgress()
 
   todoList.innerHTML = ''
 

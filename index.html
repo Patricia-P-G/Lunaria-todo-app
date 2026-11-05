@@ -7,7 +7,6 @@
     <title>Lunaria | My Tasks</title>
   </head>
 
-
   <body>
     <div class="container">
       <h1>Todo App</h1>
@@ -41,6 +40,18 @@
           <option value="high-to-low" selected>Priority (High to Low)</option>
           <option value="low-to-high">Priority (Low to High)</option>
         </select>
+      </div>
+
+      <!-- Task progress -->
+      <div class="task-progress">
+        <div class="task-progress-header">
+          <span id="progress-count">0 of 0 completed</span>
+          <span id="progress-percentage">0%</span>
+        </div>
+
+        <div id="progress-bar" class="progress-bar">
+          <div id="progress-fill" class="progress-fill"></div>
+        </div>
       </div>
 
       <ul class="todo-list" id="todo-list"></ul>
